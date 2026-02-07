@@ -24,6 +24,7 @@ body{
   font-size:4em;
   animation:float 8s ease-in-out infinite,beat 1.5s infinite;
   opacity:0.8;
+  pointer-events:none;
 }
 @keyframes float{
   0%,100%{transform:translateY(0)}
@@ -47,7 +48,6 @@ body{
   display:none;
   animation:fadeIn 0.9s ease-in-out;
 }
-
 @keyframes fadeIn{
   from{opacity:0;transform:scale(0.96)}
   to{opacity:1;transform:scale(1)}
@@ -72,23 +72,18 @@ button{
   color:white;
 }
 
-/* FLOATING SPIRAL HEARTS */
+/* FLOATING HEARTS */
 .flow{
   position:absolute;
   bottom:-40px;
   font-size:2em;
-  animation:spiral 6s linear;
+  animation:spiralUp 6s linear;
+  pointer-events:none;
 }
-@keyframes spiral{
+@keyframes spiralUp{
   0%{transform:translate(0,0) rotate(0deg);opacity:0}
-  100%{transform:translate(0,-120vh) rotate(720deg);opacity:1}
+  100%{transform:translate(80px,-120vh) rotate(720deg);opacity:1}
 }
-
-/* QUIZ */
-input[type=radio]{margin:10px}
-
-/* VIDEO */
-video{width:100%;border-radius:15px}
 
 /* TYPING TEXT */
 .type-text{
@@ -96,22 +91,29 @@ video{width:100%;border-radius:15px}
   border-right:2px solid #ff2f6d;
   animation:blink 1s infinite;
 }
-@keyframes blink{50%{border-color:transparent}}
+@keyframes blink{
+  50%{border-color:transparent}
+}
+
+video,img{
+  width:70%;
+  border-radius:15px;
+}
 </style>
 </head>
 
 <body>
 
-<!-- MUSIC -->
-<audio id="mu" loop>
-  <source src="mu.mp3" type="audio/mp3">
+<!-- BACKGROUND MUSIC -->
+<audio id="bgMusic" loop>
+  <source src="mu.mp3" type="audio/mpeg">
 </audio>
 
 <!-- FIXED HEARTS -->
 <div class="fixed-heart" style="top:10%;left:15%">❤️</div>
 <div class="fixed-heart" style="top:20%;left:75%">💖</div>
-<div class="fixed-heart" style="top:70%;left:20%">❤️</div>
-<div class="fixed-heart" style="top:65%;left:80%">💖</div>
+<div class="fixed-heart" style="top:65%;left:20%">❤️</div>
+<div class="fixed-heart" style="top:70%;left:80%">💖</div>
 
 <!-- PAGE 1 -->
 <div class="container" id="page1" style="display:block">
@@ -122,76 +124,61 @@ video{width:100%;border-radius:15px}
 
 <!-- PAGE 2 -->
 <div class="container" id="page2">
-<h1> Yay! I LOVE YOU! 😍🥰😚</h1> <H3> You made me the happiest! 🫶</H3> <h1>💘 Happy Valentine’s Day Nanna 💘</h1> <p>Distance can’t stop our love 💌</p>
-  <img src="cute.gif" width="70%">
-  <br><br>
+  <h1>Yay! I LOVE YOU 😍🥰😚</h1>
+  <p>You made me the happiest 🫶</p>
+  <img src="cute.gif"><br><br>
   <button class="yes" onclick="goPage(3)">Next 🤍</button>
 </div>
 
-<!-- PAGE 3 QUIZ -->
+<!-- PAGE 3 -->
 <div class="container" id="page3">
   <h1>💖 Love Quiz 💖</h1>
-
-  <p>1️⃣Who am I to you? 😌</p>
-  <label><input type="radio" name="q1" value="0">Girlfriend
-</label><br>
-  <label><input type="radio" name="q1" value="1">My peace, my home, my everything 💖</label>
+  <p>1️⃣ Who am I to you?</p>
+  <label><input type="radio" name="q1" value="1">My everything 💖</label><br>
+  <label><input type="radio" name="q1" value="0">Girlfriend</label>
 
   <p>2️⃣ Who misses more?</p>
   <label><input type="radio" name="q2" value="1">You 😘</label><br>
   <label><input type="radio" name="q2" value="0">Me 😜</label>
 
-  <p>3️⃣Our future plan? 🏡?</p>
-  <label><input type="radio" name="q3" value="0">Trips ✈️</Label><br>
-  <label><input type="radio" name="q3" value="1">Forever together💍❤️</label>
-<h3>Quiz finished… result already known 😘❤️</h3>
-  <br>
-  <button class="yes" onclick="submitQuiz()">Submit 💝</button>
-</div> 
+  <p>3️⃣ Our future?</p>
+  <label><input type="radio" name="q3" value="1">Forever 💍❤️</label><br>
+  <label><input type="radio" name="q3" value="0">Trips ✈️</label><br><br>
 
-<!-- PAGE 4 RESULT -->
+  <button class="yes" onclick="submitQuiz()">Submit 💝</button>
+</div>
+
+<!-- PAGE 4 -->
 <div class="container" id="page4">
   <h1>🎉 Quiz Result 🎉</h1>
   <h2 id="scoreText"></h2>
-  <p>You are officially my person.
-
-No distance can break us.
-
-No fight can end us.
-
-Only love, laughter & forever ❤️🥹</p>
-  <img src="kiss.gif" width="70%">
-  <br>
+  <img src="kiss.gif"><br>
   <button class="yes" onclick="goPage(5)">Continue 💌</button>
 </div>
 
-<!-- PAGE 5 SURPRISE -->
+<!-- PAGE 5 -->
 <div class="container" id="page5">
-  <h1>💌 Asalina Surprise Eppudu Undhi 💌</h1>
-  <p>With lots of love 💕 Heart beats faster now 😍</p>
-  <img src="surprise.gif" width="70%">
-  <br>
+  <h1>💌 Asalina Surprise 💌</h1>
+  <img src="surprise.gif"><br>
   <button class="yes" onclick="goPage(6)">Open 🎁</button>
 </div>
 
-<!-- PAGE 6 VIDEO -->
+<!-- PAGE 6 -->
 <div class="container" id="page6">
   <h1>🎥 Just For You ❤️</h1>
   <video controls>
-    <source src="vedio.mp4" type="video/mp4" height="200">
-  </video>
-  <br>
-  <button class="yes" onclick="goPage(7)">Tap here🤍</button>
+    <source src="vedio.mp4" type="video/mp4">
+  </video><br>
+  <button class="yes" onclick="goPage(7)">Tap 🤍</button>
 </div>
 
-<!-- PAGE 7 TEXT -->
+<!-- PAGE 7 -->
 <div class="container" id="page7">
   <h3 id="loveText" class="type-text"></h3>
-  <h1>My heart is yours 💖✨</h1>
-  <button class="yes" onclick="goPage(8)">Finally❤️👉</button>
+  <button class="yes" onclick="goPage(8)">Finally ❤️</button>
 </div>
 
-<!-- PAGE 8 FINAL -->
+<!-- PAGE 8 -->
 <div class="container" id="page8">
   <img src="tq.gif" width="100%">
 </div>
@@ -201,13 +188,17 @@ let disableHearts=false;
 
 /* NO BUTTON ESCAPE */
 const noBtn=document.getElementById("noBtn");
-noBtn.addEventListener("mouseover",()=>{
-  noBtn.style.transform=`translate(${Math.random()*200-100}px,${Math.random()*200-100}px)`;
+noBtn.addEventListener("mouseenter",()=>{
+  noBtn.style.position="absolute";
+  noBtn.style.left=Math.random()*(window.innerWidth-100)+"px";
+  noBtn.style.top=Math.random()*(window.innerHeight-50)+"px";
 });
 
 /* START */
 function startLove(){
-  document.getElementById("bgMusic").play();
+  const music=document.getElementById("bgMusic");
+  music.volume=0.4;
+  music.play().catch(()=>{});
   goPage(2);
 }
 
@@ -221,7 +212,7 @@ function goPage(n){
   if(n===7) typeEffect();
 }
 
-/* HEART FLOW */
+/* HEARTS */
 function heartsFlow(){
   let interval=setInterval(()=>{
     if(disableHearts) return;
@@ -242,22 +233,21 @@ function submitQuiz(){
     let s=document.querySelector(`input[name=${q}]:checked`);
     if(s) score+=parseInt(s.value);
   });
-  document.getElementById("scoreText").innerText=`You scored ${score} / 3 💖`;
+  document.getElementById("scoreText").innerText=`You scored ${score}/3 💖`;
   goPage(4);
 }
 
 /* TYPE EFFECT */
-const text7=`Ippati varaku nuvvu chusina prathi slide lo  
+const text7=`Ippati varaku nuvvu chusina prathi page lo  
 naa smile undhi,  
 naa memories unnayi,  
 naa prema undhi nanna..  
 
 Distance unna, time lekapoyina,  
 ups & downs unna…  
-naa choice okkate,  
 
+naa choice okkate  
 Nuvve.  
-Yeppatiki.  
 Forever. 💍❤️`;
 
 function typeEffect(){
